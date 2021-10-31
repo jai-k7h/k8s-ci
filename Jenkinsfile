@@ -12,7 +12,7 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git branch: 'master', credentialsId: '8b6b6a7e-add0-427a-9fc6-04a3ff149eda', url: 'https://github.com/jai-k7h/k8s-ci/'
+        git branch: 'main', credentialsId: '8b6b6a7e-add0-427a-9fc6-04a3ff149eda', url: 'https://github.com/jai-k7h/k8s-ci/'
       }
     }
 
