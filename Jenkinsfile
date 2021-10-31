@@ -28,7 +28,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry('registry.hub.docker.com/vadar/nginx') {
-            sh "docker login -u vadar -p qwer1234A nexus.skssteels.tk:8083"
+            sh "docker login -u vadar -p qwer1234A"
             sh 'docker push ${registry}:${BUILD_NUMBER}'
           }
         }
