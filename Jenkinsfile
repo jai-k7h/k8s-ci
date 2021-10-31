@@ -27,8 +27,8 @@ pipeline {
     stage('Push Image') {
       steps{
         script {
-          docker.withRegistry('registry.hub.docker.com/vadar/nginx') {
-            sh "docker login -u vadar -p qwer1234A"
+          docker.withRegistry('registry.hub.docker.com/vadar/nginx', 'docker-cred') { 
+            sh "docker login"
             sh 'docker push ${registry}:${BUILD_NUMBER}'
           }
         }
