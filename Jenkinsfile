@@ -28,7 +28,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry('registry.hub.docker.com/vadar/nginx', 'docker-cred') { 
-            sh "docker login"
+            sh "docker login -u ${USERNAME} -p ${PASSWORD}"
             sh 'docker push ${registry}:${BUILD_NUMBER}'
           }
         }
