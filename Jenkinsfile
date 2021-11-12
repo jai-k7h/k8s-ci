@@ -3,7 +3,7 @@ pipeline {
 
 
   environment {
-    registry = "registry.hub.docker.com/vadar/nginx"
+    registry = "registry.hub.docker.com/jaik7/tvr-configurator-ui"
     dockerImage = ""
     ImageName = "${registry}:${BUILD_NUMBER}"
   }
@@ -20,6 +20,7 @@ pipeline {
       steps{
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          sh '''docker build -t docker1-tag:latest us.gcr.io/project-name/docker1-tag:latest -f "Dockerfile1" .'''
         }
       }
     }
