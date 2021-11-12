@@ -1,0 +1,21 @@
+FROM registry.access.redhat.com/ubi8/ubi-minimal
+
+RUN microdnf install yum
+RUN yum install git https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm -y
+RUN curl -sL https://rpm.nodesource.com/setup_12.x | bash -
+RUN yum -y install nodejs gcc-c++ make
+RUN yum update -y
+RUN yum install nginx -y
+
+# clone rhvconfigurator
+RUN mkdir -p /home/rhv
+WORKDIR /home/rhv
+RUN git clone https://27cf5ace2c31374a4f56eded5fc4f6947d368bf1@github.com/PNarode/rhvconfigurator.git
+WORKDIR /home/rhv/rhvconfigurator
+RUN npm install yarn global
+RUN /home/rhv/rhvconfigurator/node_modules/yarn/bin/yarn
+RUN /home/rhv/rhvconfigurator/node_modules/yarn/bin/yarn build
+
+RUN cp -r build/* /usr/share/nginx/html/
+
+CMD ["nginx", "-g", "daemon off;"]
